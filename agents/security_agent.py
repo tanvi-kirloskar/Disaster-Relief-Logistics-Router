@@ -28,6 +28,22 @@ class SecurityAgent:
             "system override"
         ]
 
+        redacted_report = report
+
+        redacted_report = re.sub(
+            r"\b\d{10}\b",
+            "[REDACTED_PHONE]",
+            redacted_report
+        )
+
+        redacted_report = re.sub(
+            r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
+            "[REDACTED_EMAIL]",
+            redacted_report
+        )
+
+        incident.redacted_report = redacted_report
+
         for phrase in suspicious_phrases:
 
             if phrase in report.lower():
@@ -41,6 +57,30 @@ class SecurityAgent:
         else:
             incident.security_status = "PASSED"
 
-        incident.redacted_report = report
+        incident.security_notes = notes
+
+        incident.redacted_report = redacted_report
+
+        incident.status = "SECURITY_CHECKED"
+
+        return incident
+    
+        redacted_report = report
+
+        redacted_report = re.sub(
+            r"\b\d{10}\b",
+            "[REDACTED_PHONE]",
+            redacted_report
+        )
+
+        redacted_report = re.sub(
+            r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
+            "[REDACTED_EMAIL]",
+            redacted_report
+        )
+
+        incident.redacted_report = redacted_report
+
+        #incident.redacted_report = report
 
         return incident
