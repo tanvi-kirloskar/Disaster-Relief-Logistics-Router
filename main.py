@@ -1,12 +1,14 @@
 from workflow.orchestrator import DisasterWorkflow
+from pprint import pprint
+
 
 workflow = DisasterWorkflow()
 
 incident = workflow.run(
     report="""
-    My phone number is 9876543210.
-    Family trapped by flood.
+    School building collapsed.
+    Multiple injuries reported.
     """
 )
 
-print(incident.model_dump())
+pprint(incident.model_dump())

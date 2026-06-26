@@ -7,7 +7,7 @@ class IntakeAgent:
 
         incident = IncidentState(
             incident_id=f"INC-{str(uuid4())[:8]}",
-            report=report,
+            report=report.strip(),
             location=location
         )
 
