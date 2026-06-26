@@ -11,4 +11,8 @@ incident = workflow.run(
     """
 )
 
-pprint(incident.model_dump())
+print("\n===== FINAL INCIDENT STATE =====\n")
+
+pprint(
+    incident.model_dump()
+)

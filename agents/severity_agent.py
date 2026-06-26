@@ -43,12 +43,37 @@ Incident Report:
 {incident_text}
 """
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
+        try:
 
-        severity = response.text.strip().upper()
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt
+            )
+
+            severity = response.text.strip().upper()
+
+        except Exception:
+
+            report_text = incident_text.lower()
+
+            if (
+                "collapse" in report_text
+                or "injuries" in report_text
+                or "dead" in report_text
+            ):
+                severity = "CRITICAL"
+
+            elif (
+                "trapped" in report_text
+                or "rescue" in report_text
+            ):
+                severity = "HIGH"
+
+            elif "shelter" in report_text:
+                severity = "MEDIUM"
+
+            else:
+                severity = "LOW"
 
         valid_levels = [
             "LOW",
