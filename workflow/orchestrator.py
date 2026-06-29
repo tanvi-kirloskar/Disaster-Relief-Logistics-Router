@@ -5,7 +5,9 @@ from agents.resource_planner_agent import ResourcePlannerAgent
 from agents.human_review_agent import (
     HumanReviewAgent
 )
-
+from agents.notification_agent import (
+    NotificationAgent
+)
 
 class DisasterWorkflow:
 
@@ -23,6 +25,9 @@ class DisasterWorkflow:
             HumanReviewAgent()
         )
 
+        self.notification_agent = (
+            NotificationAgent()
+        )
     def run(self, report, location="Unknown"):
 
         # Step 1: Intake
@@ -53,6 +58,10 @@ class DisasterWorkflow:
         incident = self.human_review_agent.process(
             incident,
             decision="APPROVE"
+        )
+
+        incident = self.notification_agent.process(
+            incident
         )
         return incident
     

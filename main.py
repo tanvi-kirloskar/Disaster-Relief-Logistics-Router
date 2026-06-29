@@ -6,9 +6,9 @@ workflow = DisasterWorkflow()
 
 incident = workflow.run(
     report="""
-    School building collapsed.
-    Multiple injuries reported.
-    """
+School building collapsed.
+Multiple injuries reported.
+"""
 )
 
 print("\n===== FINAL INCIDENT STATE =====\n")
