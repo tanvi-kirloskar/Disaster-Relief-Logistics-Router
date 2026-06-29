@@ -2,6 +2,9 @@ from agents.intake_agent import IntakeAgent
 from agents.security_agent import SecurityAgent
 from agents.severity_agent import SeverityAgent
 from agents.resource_planner_agent import ResourcePlannerAgent
+from agents.human_review_agent import (
+    HumanReviewAgent
+)
 
 
 class DisasterWorkflow:
@@ -15,6 +18,10 @@ class DisasterWorkflow:
         self.severity_agent = SeverityAgent()
 
         self.resource_planner_agent = ResourcePlannerAgent()
+
+        self.human_review_agent = (
+            HumanReviewAgent()
+        )
 
     def run(self, report, location="Unknown"):
 
@@ -39,4 +46,14 @@ class DisasterWorkflow:
             incident
         )
 
+        incident = self.human_review_agent.process(
+            incident
+        )
+
+        incident = self.human_review_agent.process(
+            incident,
+            decision="APPROVE"
+        )
         return incident
+    
+
